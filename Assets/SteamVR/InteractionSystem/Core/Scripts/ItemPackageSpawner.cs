@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine.Events;
+using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -33,7 +34,7 @@ namespace Valve.VR.InteractionSystem
 
 		public ItemPackage _itemPackage;
 
-		private bool useItemPackagePreview = true;
+		public bool useItemPackagePreview = true;
 		private bool useFadedPreview = false;
 		private GameObject previewObject;
 
@@ -328,7 +329,7 @@ namespace Valve.VR.InteractionSystem
 				RemoveMatchingItemTypesFromHand( ItemPackage.ItemPackageType.OneHanded, hand );
 				RemoveMatchingItemTypesFromHand( ItemPackage.ItemPackageType.TwoHanded, hand );
 				RemoveMatchingItemTypesFromHand( ItemPackage.ItemPackageType.TwoHanded, hand.otherHand );
-			}
+            }
 
 			// if we're trying to spawn a two-handed item, remove one and two-handed items from both hands
 			if ( itemPackage.packageType == ItemPackage.ItemPackageType.TwoHanded )
@@ -337,9 +338,10 @@ namespace Valve.VR.InteractionSystem
 				RemoveMatchingItemTypesFromHand( ItemPackage.ItemPackageType.OneHanded, hand.otherHand );
 				RemoveMatchingItemTypesFromHand( ItemPackage.ItemPackageType.TwoHanded, hand );
 				RemoveMatchingItemTypesFromHand( ItemPackage.ItemPackageType.TwoHanded, hand.otherHand );
-			}
+            }
+            
 
-			spawnedItem = GameObject.Instantiate( itemPackage.itemPrefab );
+            spawnedItem = GameObject.Instantiate( itemPackage.itemPrefab );
 			spawnedItem.SetActive( true );
 			hand.AttachObject( spawnedItem, grabType, attachmentFlags );
 

@@ -266,7 +266,7 @@ namespace Valve.VR.InteractionSystem
 			transform.position = prevPosition;
 			transform.position = collision.contacts[0].point - transform.forward * ( 0.75f - ( Util.RemapNumberClamped( prevVelocity.magnitude, 0f, 10f, 0.0f, 0.1f ) + Random.Range( 0.0f, 0.05f ) ) );
 		}
-
+        
 
 		//-------------------------------------------------
 		void OnDestroy()

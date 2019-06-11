@@ -55,7 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Items\SimpleFire\FireSource.cs" />
      <Compile Include="Assets\Scripts\DetachFromHands.cs" />
+     <Compile Include="Assets\Scripts\PlayerMovementController.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/UnityProjects/BushfireVR/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

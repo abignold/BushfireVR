@@ -55,7 +55,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Items\SimpleFire\FireSource.cs" />
+     <Compile Include="Assets\Fire Hose Nozzle\Scripts\Firehose.cs" />
+     <Compile Include="Assets\Items\Fire\Fire.cs" />
      <Compile Include="Assets\Scripts\DetachFromHands.cs" />
      <Compile Include="Assets\Scripts\PlayerMovementController.cs" />
  <Reference Include="Unity.Timeline.Editor">

@@ -5,27 +5,34 @@ using UnityEngine;
 public class GroundFire : MonoBehaviour
 {
 
-    public int health = 500;
-    public int regenPerSecond = 1;
+    public float maxHealth = 500;
+    public float currentHealth = 500;
+    private float regenPerSecond = 50;
+    private float deathScale = 0.05f;
     public bool isFireStopped = false;
     private float originalLightIntensity;
-    private float resistance = 15;
+    private float resistance = .90f;
     private Vector3 damageModifier;
     private float lightIntensityModifier;
     private Vector3 originalScale;
     private Light lightSource;
+    private float lastDamageTime = 0;
+    private float regenDelay = 1f;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        this.maxHealth *= (1 + this.deathScale);
+        this.currentHealth += maxHealth * (this.deathScale);
         lightSource = GetComponentInChildren<Light>();
         originalScale = transform.localScale;
         originalLightIntensity = lightSource.intensity;
-        damageModifier.x = originalScale.x / health;
-        damageModifier.y = originalScale.y / health;
-        damageModifier.z = originalScale.z / health;
-        lightIntensityModifier = originalLightIntensity / health;
+        damageModifier.x = originalScale.x / maxHealth;
+        damageModifier.y = originalScale.y / maxHealth;
+        damageModifier.z = originalScale.z / maxHealth;
+        lightIntensityModifier = originalLightIntensity / maxHealth;
+
+        this.UpdateScale(this.currentHealth);
 
     }
 
@@ -36,24 +43,29 @@ public class GroundFire : MonoBehaviour
         {
             return;
         }
-        if (transform.localScale.x < (originalScale.x * 0.10))
+
+        if (transform.localScale.x < this.deathScale)
         {
-            //Destroy(this.gameObject);
             this.EndFire();
-            return;
         }
-        if (transform.localScale.x <= originalScale.x)
+
+        // do regen
+        if (Time.time > (lastDamageTime + regenDelay))
         {
-            transform.localScale += new Vector3(regenPerSecond * damageModifier.x * Time.deltaTime, regenPerSecond * damageModifier.x * Time.deltaTime, regenPerSecond * damageModifier.x * Time.deltaTime);
-            lightSource.intensity += regenPerSecond * lightIntensityModifier * Time.deltaTime;
+            currentHealth = Mathf.Min(maxHealth, currentHealth + (regenPerSecond * transform.localScale.x * Time.deltaTime));
         }
+
+        // update scale
+        this.UpdateScale(this.currentHealth);
     }
 
     void WaterCollision(float damage)
     {
-        damage /= resistance;
-        transform.localScale -= new Vector3((damage * damageModifier.x), (damage * damageModifier.y), (damage * damageModifier.z));
-        lightSource.intensity -= damage * lightIntensityModifier;
+        damage *= (1-resistance);
+        currentHealth -= damage;
+        this.lastDamageTime = Time.time;
+        //transform.localScale -= new Vector3((damage * damageModifier.x), (damage * damageModifier.y), (damage * damageModifier.z));
+        //lightSource.intensity -= damage * lightIntensityModifier;
     }
 
     void EndFire()
@@ -78,5 +90,11 @@ public class GroundFire : MonoBehaviour
         }
         lightSource.enabled = true;
         isFireStopped = false;
+    }
+
+    void UpdateScale(float health)
+    {
+        transform.localScale = new Vector3(health * damageModifier.x, health * damageModifier.y, health * damageModifier.z);
+        lightSource.intensity = currentHealth * lightIntensityModifier;
     }
 }

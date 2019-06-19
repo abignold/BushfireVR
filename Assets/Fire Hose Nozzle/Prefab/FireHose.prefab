@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4190494412186124420}
   - component: {fileID: 4190494412186124445}
   - component: {fileID: 4190494412186124444}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FireHose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3978,7 +3978,7 @@ ParticleSystem:
     radiusScale: 0.01
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 55
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5

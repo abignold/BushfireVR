@@ -11,7 +11,7 @@ public class GroundFire : MonoBehaviour
     private float deathScale = 0.05f;
     public bool isFireStopped = false;
     private float originalLightIntensity;
-    private float resistance = .90f;
+    private float resistance = .99f;
     private Vector3 damageModifier;
     private float lightIntensityModifier;
     private Vector3 originalScale;
@@ -61,8 +61,13 @@ public class GroundFire : MonoBehaviour
 
     void WaterCollision(float damage)
     {
+        if (this.isFireStopped)
+        {
+            return;
+        }
         damage *= (1-resistance);
         currentHealth -= damage;
+        Debug.Log("HEALTH: " + this.currentHealth);
         this.lastDamageTime = Time.time;
         //transform.localScale -= new Vector3((damage * damageModifier.x), (damage * damageModifier.y), (damage * damageModifier.z));
         //lightSource.intensity -= damage * lightIntensityModifier;

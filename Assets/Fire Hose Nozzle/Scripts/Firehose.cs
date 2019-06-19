@@ -9,7 +9,7 @@ public class Firehose : MonoBehaviour
 
     private ParticleSystem particleSystem;
     private List<ParticleCollisionEvent> collisionEvents;
-    public int emitValue = 5;
+    //public int emitValue = 5;
     public float sizeDecrease = 0.99f;
     private Interactable interactable;
     private SteamVR_Action_Boolean pinchAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
@@ -37,7 +37,11 @@ public class Firehose : MonoBehaviour
 
             if (isBoth)
             {
-                particleSystem.Emit(emitValue);
+                particleSystem.Play();
+                //particleSystem.Emit(emitValue);
+            } else
+            {
+                particleSystem.Stop();
             }
         }
 
@@ -47,7 +51,6 @@ public class Firehose : MonoBehaviour
     void OnParticleCollision(GameObject other)
     {
         int numCollisionEvents = particleSystem.GetCollisionEvents(other, collisionEvents);
-
         other.SendMessageUpwards("WaterCollision", numCollisionEvents, SendMessageOptions.DontRequireReceiver);
 
 

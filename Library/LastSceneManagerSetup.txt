@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/ObjectFireTestScene.unity
+- path: Assets/Scenes/GroundFireTestScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

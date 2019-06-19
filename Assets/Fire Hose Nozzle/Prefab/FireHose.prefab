@@ -268,7 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59355e054430a541b890fe652a47490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emitValue: 5
   sizeDecrease: 0.99
 --- !u!199 &4190494412186124445
 ParticleSystemRenderer:
@@ -344,7 +343,7 @@ ParticleSystem:
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
-  ringBufferMode: 0
+  ringBufferMode: 1
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 1
@@ -414,9 +413,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 2
-      minScalar: 5
+      minMaxState: 3
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -846,8 +845,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 500
-    size3D: 1
+    maxNumParticles: 1000
+    size3D: 0
     rotation3D: 1
     gravityModifier:
       serializedVersion: 2
@@ -1111,7 +1110,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 250
+      scalar: 400
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1236,8 +1235,8 @@ ParticleSystem:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.23242188
-          value: 0.10857391
+          time: 0.050941177
+          value: 0.05217117
           inSlope: 0
           outSlope: 0
           tangentMode: 0

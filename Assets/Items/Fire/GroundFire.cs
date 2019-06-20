@@ -11,7 +11,6 @@ public class GroundFire : MonoBehaviour
     private float deathScale = 0.05f;
     public bool isFireStopped = false;
     private float originalLightIntensity;
-    private float resistance = .99f;
     private Vector3 damageModifier;
     private float lightIntensityModifier;
     private Vector3 originalScale;
@@ -65,7 +64,6 @@ public class GroundFire : MonoBehaviour
         {
             return;
         }
-        damage *= (1-resistance);
         currentHealth -= damage;
         Debug.Log("HEALTH: " + this.currentHealth);
         this.lastDamageTime = Time.time;

@@ -2327,7 +2327,7 @@ ParticleSystem:
     randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     multiplierCurve:
       serializedVersion: 2
       minMaxState: 0
@@ -7025,7 +7025,7 @@ ParticleSystem:
     randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     multiplierCurve:
       serializedVersion: 2
       minMaxState: 0
@@ -9535,8 +9535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b60d26e242df554394a5090f4c288aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  regenPerSecond: 15
+  maxHealth: 500
+  currentHealth: 500
   isFireStopped: 0
 --- !u!65 &8142160779698232386
 BoxCollider:
@@ -11787,7 +11787,7 @@ ParticleSystem:
     randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     multiplierCurve:
       serializedVersion: 2
       minMaxState: 0

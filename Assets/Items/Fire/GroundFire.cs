@@ -17,19 +17,24 @@ public class GroundFire : MonoBehaviour
     private Light lightSource;
     private float lastDamageTime = 0;
     private float regenDelay = 1f;
-
+    private AudioSource audioSource;
+    private float originalVolume;
+    private float volumeModifier;
     // Start is called before the first frame update
     void Start()
     {
         this.maxHealth *= (1 + this.deathScale);
         this.currentHealth += maxHealth * (this.deathScale);
-        lightSource = GetComponentInChildren<Light>();
-        originalScale = transform.localScale;
+        this.lightSource = GetComponentInChildren<Light>();
+        this.audioSource = GetComponent<AudioSource>();
+        this.originalScale = transform.localScale;
         originalLightIntensity = lightSource.intensity;
         damageModifier.x = originalScale.x / maxHealth;
         damageModifier.y = originalScale.y / maxHealth;
         damageModifier.z = originalScale.z / maxHealth;
         lightIntensityModifier = originalLightIntensity / maxHealth;
+        this.originalVolume = this.audioSource.volume;
+        this.volumeModifier = this.originalVolume / maxHealth;
 
         this.UpdateScale(this.currentHealth);
 
@@ -80,7 +85,7 @@ public class GroundFire : MonoBehaviour
         }
 
         lightSource.enabled = false;
-
+        audioSource.enabled = false;
         isFireStopped = true;
     }
 
@@ -92,12 +97,15 @@ public class GroundFire : MonoBehaviour
             particleSystem.Play();
         }
         lightSource.enabled = true;
+        audioSource.enabled = true;
         isFireStopped = false;
     }
 
     void UpdateScale(float health)
     {
         transform.localScale = new Vector3(health * damageModifier.x, health * damageModifier.y, health * damageModifier.z);
-        lightSource.intensity = currentHealth * lightIntensityModifier;
+        lightSource.intensity = health * lightIntensityModifier;
+        this.audioSource.volume = health * this.volumeModifier;
+
     }
 }

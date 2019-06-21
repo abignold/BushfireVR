@@ -9,6 +9,7 @@ public class Firehose : MonoBehaviour
 
     private ParticleSystem particleSystem;
     private List<ParticleCollisionEvent> collisionEvents;
+    private AudioSource audioSource;
     public int emitValue = 400;
     public float powerModifier = 1f;
     private Interactable interactable;
@@ -22,22 +23,36 @@ public class Firehose : MonoBehaviour
         interactable = GetComponent<Interactable>();
         particleSystem = GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        bool isBoth = false;
         if (interactable.attachedToHand)
         {
             SteamVR_Input_Sources hand = interactable.attachedToHand.handType;
             bool isPinch = pinchAction.GetState(hand);
             bool isGrab = grabAction.GetState(hand);
-            bool isBoth = isGrab && isPinch;
+            isBoth = isGrab && isPinch;
 
             if (isBoth)
             {   
                 particleSystem.Emit(this.emitValue);
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+            }
+        }
+
+        if (!isBoth)
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
             }
         }
 

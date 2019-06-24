@@ -70,7 +70,6 @@ public class GroundFire : MonoBehaviour
             return;
         }
         currentHealth -= damage;
-        Debug.Log("HEALTH: " + this.currentHealth);
         this.lastDamageTime = Time.time;
         //transform.localScale -= new Vector3((damage * damageModifier.x), (damage * damageModifier.y), (damage * damageModifier.z));
         //lightSource.intensity -= damage * lightIntensityModifier;

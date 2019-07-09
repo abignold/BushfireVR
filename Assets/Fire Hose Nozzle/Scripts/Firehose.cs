@@ -71,14 +71,6 @@ public class Firehose : MonoBehaviour
         other.SendMessageUpwards("WaterCollision", (numCollisionEvents * this.powerModifier), SendMessageOptions.DontRequireReceiver);
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.Log("ADAM");
-        }
-        //if (collision.relativeVelocity.magnitude > 2)
-        //    audioSource.Play();
-    }
+
 
 }

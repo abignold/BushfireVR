@@ -7,7 +7,7 @@ public class GroundFire : MonoBehaviour
 
     public float maxHealth = 500;
     public float currentHealth = 500;
-    private float regenPerSecond = 50;
+    private float regenPerSecond = 100;
     private float deathScale = 0.05f;
     public bool isFireStopped = false;
     private float originalLightIntensity;
@@ -56,7 +56,7 @@ public class GroundFire : MonoBehaviour
         // do regen
         if (Time.time > (lastDamageTime + regenDelay))
         {
-            currentHealth = Mathf.Min(maxHealth, currentHealth + (regenPerSecond * transform.localScale.x * Time.deltaTime));
+            setCurrentHealth(Mathf.Min(maxHealth, currentHealth + (regenPerSecond * transform.localScale.x * Time.deltaTime)));
         }
 
         // update scale
@@ -69,7 +69,7 @@ public class GroundFire : MonoBehaviour
         {
             return;
         }
-        currentHealth -= damage;
+        setCurrentHealth(currentHealth - damage);
         this.lastDamageTime = Time.time;
         //transform.localScale -= new Vector3((damage * damageModifier.x), (damage * damageModifier.y), (damage * damageModifier.z));
         //lightSource.intensity -= damage * lightIntensityModifier;
@@ -106,5 +106,10 @@ public class GroundFire : MonoBehaviour
         lightSource.intensity = health * lightIntensityModifier;
         this.audioSource.volume = health * this.volumeModifier;
 
+    }
+
+    public void setCurrentHealth(float health)
+    {
+        this.currentHealth = Mathf.Max(0, health);
     }
 }

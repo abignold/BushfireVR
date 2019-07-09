@@ -59,7 +59,9 @@
      <Compile Include="Assets\Items\Fire\GroundFire.cs" />
      <Compile Include="Assets\Items\WaterBarrel\BarrelBehaviour.cs" />
      <Compile Include="Assets\Scripts\DetachFromHands.cs" />
+     <Compile Include="Assets\Scripts\EndGameMonitor.cs" />
      <Compile Include="Assets\Scripts\PlayerMovementController.cs" />
+     <Compile Include="Assets\Scripts\SceneChanger.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/UnityProjects/BushfireVR/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
